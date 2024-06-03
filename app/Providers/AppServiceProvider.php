@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Services\MaterialService;
+use App\Services\OpenAIService;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +14,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->singleton('MaterialService', function ($app) {
+            return new MaterialService();
+        });
+
+        $this->app->singleton('OpenAIService', function ($app) {
+            return new OpenAIService();
+        });
     }
 
     /**
@@ -19,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $loader = AliasLoader::getInstance();
+        $loader->alias('MaterialService', MaterialService::class);
     }
 }
