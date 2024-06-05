@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Console\Commands\RunPhpStan;
 use App\Services\MaterialService;
 use App\Services\OpenAIService;
 use Illuminate\Foundation\AliasLoader;

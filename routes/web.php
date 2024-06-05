@@ -7,6 +7,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/testing', function () {
-    return MaterialService::findRubber();
+Route::get('/belag', function () {
+    return view('rubberfinder');
 });

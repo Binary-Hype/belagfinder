@@ -13,7 +13,7 @@ class OpenAIService
         return OpenAI::client(getenv('OPENAI_API_KEY'), getenv('OPENAI_ORGANIZATION_ID'));
     }
 
-    public static function sendOpenAIMessage(string $message, ?string $context = null): string
+    public static function sendOpenAIMessage(string $message, string $context = '', bool $decodeJson = false): string|array
     {
         $client = self::getOpenAIClient();
 
@@ -21,14 +21,18 @@ class OpenAIService
             ['role' => 'user', 'content' => $message]
         ];
 
-        if ($context !== null) {
+        if ($context !== '') {
             $messages[] = ['role' => 'system', 'content' => $context];
         }
 
         $result = $client->chat()->create([
-            'model' => 'gpt-4o',
+            'model' => 'gpt-3.5-turbo',
             'messages' => $messages
         ]);
+
+        if ($decodeJson) {
+            return json_decode($result->choices[0]->message->content, true);
+        }
 
         return $result->choices[0]->message->content;
     }
