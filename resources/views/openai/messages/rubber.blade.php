@@ -1,4 +1,5 @@
-Empfehle Hölzer, zu denen die folgenden Parameter am besten passen:
-- Aggresivität: defensiv
-- Spielstil: kontrolliert, moderne Abwehr
-- Kosten: kein Limit
+Empfehle Beläge, zu denen die folgenden Anforderungen am besten passen:
+- Geschwindigkeit: mittel
+- Spielstil: kontrolliert offensiv
+- Art des Belags: Noppen innen
+- Sonstiges: hohe spinfreudigkeit

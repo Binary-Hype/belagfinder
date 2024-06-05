@@ -11,7 +11,7 @@ class MaterialService
 {
     public static function findRubber(): Collection
     {
-        $context = view('openai.context.materialfinder')->render();
+        $context = view('openai.context.rubberfinder')->render();
         $message = view('openai.messages.rubber')->render();
 
         if (Cache::has('openai_suggestions')) {
@@ -21,13 +21,13 @@ class MaterialService
             Cache::put('openai_suggestions', $suggestions);
         }
 
-
         $result = collect([]);
 
         foreach($suggestions['suggestions'] as $suggestion) {
             $result->add(RubberDTO::from(json_encode($suggestion)));
         }
 
+        ray($result);
         return $result;
     }
 

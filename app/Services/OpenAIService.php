@@ -25,15 +25,23 @@ class OpenAIService
             $messages[] = ['role' => 'system', 'content' => $context];
         }
 
-        $result = $client->chat()->create([
-            'model' => 'gpt-3.5-turbo',
-            'messages' => $messages
-        ]);
+        try {
+            $result = $client->chat()->create([
+                'model' => 'gpt-3.5-turbo',
+                'messages' => $messages
+            ]);
 
-        if ($decodeJson) {
-            return json_decode($result->choices[0]->message->content, true);
+            if (isset($result->choices[0])) {
+                if ($decodeJson) {
+                    return json_decode($result->choices[0]->message->content, true);
+                }
+
+                return $result->choices[0]->message->content;
+            }
+        } catch (\Exception $e) {
+            ray($e->getMessage());
         }
 
-        return $result->choices[0]->message->content;
+        return '';
     }
 }
